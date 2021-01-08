@@ -1,9 +1,11 @@
 version: '3'
+
 services:
-  php:
+  app:
     build:
       context: ./docker
       dockerfile: Dockerfile
-    container_name: php-test-pest
+    tty: true
+    container_name: php-pest
     volumes:
       - ./src:/code

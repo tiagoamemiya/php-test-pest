@@ -1,6 +1,6 @@
 install:
 	docker-compose up -d && \
-	docker exec -it php-test-pest composer install
+	docker exec -it php-pest composer install
 
 test:
-	docker exec -it php-test-pest vendor/bin/pest
+	docker exec -it php-pest vendor/bin/pest

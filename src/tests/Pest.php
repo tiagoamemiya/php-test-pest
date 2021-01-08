@@ -39,7 +39,7 @@ expect()->extend('toBeOne', function () {
 |
 */
 
-function something()
+function getNumberOne(): int
 {
-    // ..
+    return 1;
 }

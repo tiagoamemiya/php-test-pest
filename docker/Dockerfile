@@ -1,19 +1,12 @@
-FROM php:7.4-fpm-alpine
+FROM php:7.4-alpine
 
-RUN set -x ; \
-  addgroup -g 1000 -S app ; \
-  adduser -u 1000 -D -S -G app app && exit 0 ; exit 1
-  
-RUN chown -R app:app /home/app
-
-RUN apk add --no-cache bash
+RUN apk add --update --no-cache curl $PHPIZE_DEPS && \
+    pecl install -f xdebug && docker-php-ext-enable xdebug
 
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-WORKDIR /code 
+RUN ln -s /opt/remi/php74/root/usr/bin/pecl /usr/bin/pecl
 
-EXPOSE 9000
+RUN mkdir -p /code
 
-USER app
-
-ENTRYPOINT ["php-fpm"]
+WORKDIR /code
